@@ -53,22 +53,21 @@ class EventManager {
   }
   soldTicket(quantity, id) {
     try {
-      if (!(quantity>0)) {
-        throw new Error("Insert valid quantity")
+      if (!(quantity > 0)) {
+        throw new Error("Insert valid quantity");
       } else {
         const one = this.readOne(id);
         console.log(one);
-        if ((typeof one === "object") || quantity>one.capacity) {
-          throw new Error("No more capacity")
-        } else {
-          one.capacity = one.capacity - quantity;
-          EventManager.#totalGain =
-            EventManager.#totalGain + EventManager.#perGain * quantity * one.price;
-          return one.capacity;
-        }
+        if (typeof one === "string") throw new Error(one);
+        if (quantity > one.capacity) throw new Error("No more capacity");
+        one.capacity = one.capacity - quantity;
+        EventManager.#totalGain =
+          EventManager.#totalGain +
+          EventManager.#perGain * quantity * one.price;
+        return one.capacity;
       }
     } catch (error) {
-      return error.message
+      return error.message;
     }
   }
 }
@@ -82,6 +81,6 @@ console.log(events.createEvent({ name: "hp3", place: "showcase" }));
 //console.log(events.readEvents());
 console.log(events.readOne(1));
 console.log(events.readOne(10));
-console.log(events.soldTicket(-2,1));
-console.log(events.soldTicket(100,2));
-console.log(events.soldTicket(10,20));
+console.log(events.soldTicket(-2, 1));
+console.log(events.soldTicket(100, 2));
+console.log(events.soldTicket(10, 20));
