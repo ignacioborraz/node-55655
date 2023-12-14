@@ -1,4 +1,4 @@
-class EventManager {
+class EventsMemory {
   static #events = [];
   static #perGain = 0.3;
   static #totalGain = 0;
