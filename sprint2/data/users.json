@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "tomas",
+    "photo": "https://i.pravatar.cc/300",
+    "email": "amariar@gmail.com"
+  },
+  {
+    "id": 2,
+    "name": "matias",
+    "photo": "https://i.pravatar.cc/300",
+    "email": "amariar@gmail.com"
+  },
+  {
+    "id": 3,
+    "name": "tomas",
+    "photo": "https://i.pravatar.cc/300",
+    "email": "amariar@gmail.com"
+  },
+  {
+    "id": 4,
+    "name": "tomas",
+    "photo": "https://i.pravatar.cc/300",
+    "email": "amariar@gmail.com"
+  },
+  {
+    "id": 5,
+    "name": "tomas",
+    "photo": "https://i.pravatar.cc/300",
+    "email": "amariar@gmail.com"
+  }
+]
