@@ -1,13 +1,5 @@
 [
   {
-    "id": "af889f946ec0f986c06f19e5",
-    "name": "hp7",
-    "place": "hoyts",
-    "price": 10,
-    "capacity": 2,
-    "date": "2023-12-22T00:54:37.492Z"
-  },
-  {
     "id": "c5fa672ef46839b5398a620e",
     "name": "superman",
     "place": "alto abasto",
@@ -38,5 +30,13 @@
     "price": 10,
     "capacity": 50,
     "date": "2023-12-22T01:13:50.192Z"
+  },
+  {
+    "id": "86bcc70aa18d4c29632a1109",
+    "name": "pokemon",
+    "place": "alto abasto",
+    "price": 10,
+    "capacity": 50,
+    "date": "2023-12-22T01:32:59.143Z"
   }
 ]
