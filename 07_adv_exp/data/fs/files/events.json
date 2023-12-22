@@ -1,0 +1,42 @@
+[
+  {
+    "id": "af889f946ec0f986c06f19e5",
+    "name": "hp7",
+    "place": "hoyts",
+    "price": 10,
+    "capacity": 2,
+    "date": "2023-12-22T00:54:37.492Z"
+  },
+  {
+    "id": "c5fa672ef46839b5398a620e",
+    "name": "superman",
+    "place": "alto abasto",
+    "price": 10,
+    "capacity": 50,
+    "date": "2023-12-22T00:55:27.939Z"
+  },
+  {
+    "id": "c0e1a05e658fbc7d08fffa15",
+    "name": "batman",
+    "place": "alto abasto",
+    "price": 10,
+    "capacity": 50,
+    "date": "2023-12-22T00:58:05.746Z"
+  },
+  {
+    "id": "8b6df5e629d7fb89de1f99bf",
+    "name": "wonderwoman",
+    "place": "alto abasto",
+    "price": 10,
+    "capacity": 50,
+    "date": "2023-12-22T00:58:28.850Z"
+  },
+  {
+    "id": "3d17e5d1843bac5b4ad26840",
+    "name": "hp8",
+    "place": "alto abasto",
+    "price": 10,
+    "capacity": 50,
+    "date": "2023-12-22T01:13:50.192Z"
+  }
+]
