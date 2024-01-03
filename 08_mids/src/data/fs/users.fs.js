@@ -12,7 +12,7 @@ class UsersManager {
         this.users = JSON.parse(fs.readFileSync(this.path, "utf-8"));
       }
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
   constructor(path) {
@@ -23,41 +23,51 @@ class UsersManager {
   async create(data) {
     try {
       if (!data.name || !data.email) {
-        throw new Error("Name & Email are required");
+        const error = new Error("name & email are required");
+        error.statusCode = 400;
+        throw error;
       }
-      const event = {
+      const user = {
         id: crypto.randomBytes(12).toString("hex"),
         name: data.name,
-        place: data.place,
-        price: data.price || 10,
-        capacity: data.capacity || 50,
-        date: data.date || new Date(),
+        email: data.email,
       };
-      this.users.push(event);
+      this.users.push(user);
       const jsonData = JSON.stringify(this.users, null, 2);
       await fs.promises.writeFile(this.path, jsonData);
-      console.log("create " + event.id);
-      return event.id;
+      return user.id;
     } catch (error) {
-      console.log(error.message);
-      return error.message;
+      throw error;
+    }
+  }
+  read() {
+    try {
+      if (this.users.length === 0) {
+        const error = new Error("there aren't users!");
+        error.statusCode = 404;
+        throw error;
+      } else {
+        return this.users;
+      }
+    } catch (error) {
+      throw error;
     }
   }
   readOne(id) {
     try {
       const one = this.users.find((each) => each.id === id);
       if (!one) {
-        throw new Error("There isn't any event with id=" + id);
+        const error = new Error("there isn't user!");
+        error.statusCode = 404;
+        throw error;
       } else {
-        console.log("read " + one);
         return one;
       }
     } catch (error) {
-      console.log(error.message);
-      return error.message;
+      throw error;
     }
   }
 }
 
-const users = new UsersManager("./data/fs/files/users.json");
+const users = new UsersManager("./src/data/fs/files/users.json");
 export default users;
