@@ -1,0 +1,26 @@
+{{!-- DIRECTAMENTE DISEÑAR LA PAGINA DE INICIO --}}
+{{!-- desde el endpoint me envian el objeto con la propiedad events --}}
+{{!-- para loopear los eventos, utilizao la sintaxis de each de hbs --}}
+<main class="flex-grow-1 p-3 m-auto my-2">
+  <h1>HOME</h1>
+  <h3>{{date}}</h3>
+  {{#if details}}
+    <p>{{details}}</p>
+  {{else}}
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae qui quo consequatur sit ex voluptatibus corporis aut porro quaerat laudantium libero et inventore saepe nisi delectus, magni quas fugiat illo.
+    Praesentium cum voluptate tenetur laboriosam maiores quaerat sunt delectus ducimus ipsam quam eos iure est voluptatum sapiente recusandae, at suscipit corrupti tempora rem ea veniam omnis soluta. Iste, dolorem eos!
+    Voluptate pariatur suscipit, at iusto enim fugiat excepturi earum error commodi, inventore libero eos porro consequuntur laborum, sit provident? Explicabo molestiae quae architecto est quod iusto dicta, ut aspernatur dignissimos.
+    Fuga expedita temporibus excepturi mollitia, dolorem non. Harum laborum esse excepturi? Reiciendis laboriosam repellendus molestiae fugit ad accusamus nihil qui sunt necessitatibus! Autem, saepe quos? Modi, rerum fugiat. Sapiente, nesciunt!
+    Dignissimos impedit eum distinctio delectus saepe eos deleniti similique voluptate aliquid consectetur corrupti quo sapiente iste dolorum numquam magnam, consequatur dolores. Quibusdam, quisquam! Quisquam doloribus molestiae magnam ratione nihil ipsa?
+    Quam maxime accusantium incidunt suscipit voluptate dicta quisquam, magni odio ullam aliquid, cum, perferendis aperiam magnam harum vel sunt. Magni, fugiat fuga. Possimus nisi dicta quas dolor quaerat fuga officiis!
+    Placeat, accusamus temporibus. Placeat est iusto doloremque deserunt aut molestias facere at illo temporibus tempore laboriosam, provident, nemo, adipisci quisquam quidem quibusdam labore. Optio accusantium quod culpa modi, aliquam architecto?
+    Sit accusantium consectetur reiciendis. Iste vitae fugit consectetur labore nesciunt tenetur voluptate mollitia! Modi quam quas repudiandae pariatur consequatur ea ipsa itaque. Molestias aliquid veniam quae alias saepe, quaerat repudiandae!
+    Neque obcaecati deleniti quisquam ab dolorem voluptatem temporibus? Soluta, eligendi hic inventore, tenetur voluptas nulla dolores voluptates nam nesciunt porro maiores fugit perferendis fuga sequi in voluptatem labore consequuntur eveniet.
+    Debitis sunt unde cum deleniti voluptas obcaecati eveniet aliquid, soluta possimus et, vel ea cupiditate temporibus numquam corrupti saepe quidem iure optio quia consequatur dignissimos natus vitae. Dolores, officiis aspernatur.</p>
+  {{/if}}
+  {{#each events}}
+  {{!-- cuerpo de lo que se quiere loopear --}}
+  {{!-- this va a hacer de referencia de CADA UNO de los elementos a recorrer --}}
+  <h3>{{this}}</h3>
+  {{/each}}
+</main>
