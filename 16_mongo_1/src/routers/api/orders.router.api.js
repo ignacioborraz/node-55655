@@ -1,9 +1,9 @@
 import { orders } from "../../data/mongo/manager.mongo.js";
 import { Router } from "express";
 
-const router = Router();
+const ordersRouter = Router();
 
-router.post("/", async (req, res, next) => {
+ordersRouter.post("/", async (req, res, next) => {
   try {
     const data = req.body;
     const one = await orders.create(data);
@@ -15,34 +15,43 @@ router.post("/", async (req, res, next) => {
     return next(error);
   }
 });
-router.get("/",async(req,res,next)=>{
+ordersRouter.get("/:uid", async (req, res, next) => {
   try {
-    let filter = {}
-    if (req.query.user_id) {
-      filter = { user_id: req.query.user_id }
-    }
-    const all = await orders.read({filter})
+    const { uid } = req.params;
+    const filter = { user_id: uid };
+    const all = await orders.read({ filter });
     return res.json({
       statusCode: 200,
-      response: all
-    })
+      response: all,
+    });
   } catch (error) {
-    return next(error)
+    return next(error);
   }
-})
-router.get("/:oid", async(req,res,next)=>{
+});
+ordersRouter.put("/:oid", async (req, res, next) => {
   try {
-    const { oid } = req.params
-    const one = await orders.readOne(oid)
+    const { oid } = req.params;
+    const data = req.body;
+    const one = await orders.update(oid, data);
     return res.json({
       statusCode: 200,
-      response: one
-    })
+      response: one,
+    });
   } catch (error) {
-    return next(error)
+    return next(error);
   }
-})
-//router.put()
-//router.delete()
+});
+ordersRouter.delete("/:oid", async (req, res, next) => {
+  try {
+    const { oid } = req.params;
+    const one = await orders.destroy(oid);
+    return res.json({
+      statusCode: 200,
+      response: one,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
 
-export default router;
+export default ordersRouter;

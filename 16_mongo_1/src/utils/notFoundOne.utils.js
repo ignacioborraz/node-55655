@@ -4,7 +4,6 @@ function notFoundOne(one) {
     error.statusCode = 404;
     throw error;
   }
-  return one;
 }
 
 export default notFoundOne;

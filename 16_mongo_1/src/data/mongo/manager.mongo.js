@@ -1,6 +1,5 @@
-//importar los modelos para luego generar las instancias de los diferentes managers
-import Event from "./models/event.model.js";
 import User from "./models/user.model.js";
+import Event from "./models/event.model.js";
 import Order from "./models/order.model.js";
 import notFoundOne from "../../utils/notFoundOne.utils.js";
 
@@ -11,26 +10,20 @@ class MongoManager {
   async create(data) {
     try {
       const one = await this.model.create(data);
-      return one._id;
+      return one;
     } catch (error) {
       throw error;
     }
   }
-  async read(obj) {
+  async read({ filter, order }) {
     try {
-      //ahora obj es un objeto con dos propiedades
-      //filter con las consultas para el filtro
-      //order con el objeto para el ordenamiento
-      let { filter, order } = obj;
-      //if (!order) order = { name: 1 };    //para configurar filtro por defecto
-      //if (!filter) filter = {};           //para configurar orden por defecto
       const all = await this.model
-        .find(filter)
-        .populate("user_id")
-        .populate("event_id")
+        .find(filter, "-createdAt -updatedAt -__v")
+        //.populate("user_id","-password -createdAt -updatedAt -__v")
+        //.populate("event_id","name place price")
         .sort(order);
       if (all.length === 0) {
-        const error = new Error("There aren't documents");
+        const error = new Error("There aren't any document");
         error.statusCode = 404;
         throw error;
       }
@@ -67,10 +60,24 @@ class MongoManager {
       throw error;
     }
   }
+  async stats({ filter }) {
+    try {
+      let stats = await this.model.find(filter).explain("executionStats");
+      console.log(stats);
+      stats = {
+        quantity: stats.executionStats.nReturned,
+        time: stats.executionStats.executionTimeMillis,
+      };
+      return stats;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
-const events = new MongoManager(Event);
 const users = new MongoManager(User);
+const events = new MongoManager(Event);
 const orders = new MongoManager(Order);
 
-export { events, users, orders };
+export { users, events, orders };
+export default MongoManager;
