@@ -1,0 +1,25 @@
+<main class="flex-grow-1 m-auto d-flex flex-column">
+  <section id="background">
+    <h1 class="title">CODER CINEMA</h1>
+    <img id="arrow" src="/arrow.gif" alt="arrow" />
+  </section>
+  <h2 class="subtitle mt-4 mb-2 text-center">OUR MOVIES</h2>
+  <input type="text" style="width: 360px" class="m-auto p-2 text-center" placeholder="search..."/>
+  <section
+    id="movies"
+    class="d-flex flex-wrap justify-content-evenly w-100 mt-2 mb-4"
+  >
+
+    {{#each events}}
+      <a href="/events/{{this._id}}" class="card m-2 anchor" style="width: 360px">
+        <img
+          src="{{this.poster}}"
+          style="height: 240px"
+          class="card-img-top object-fit-cover"
+          alt="{{this.name}}"
+        />
+        <h5 class="p-2 text-center card-title">{{this.name}}</h5>
+      </a>
+    {{/each}}
+  </section>
+</main>
