@@ -7,7 +7,7 @@ import isCapacityOkMid from "../../middlewares/isCapacityOk.mid.js";
 
 const eventsRouter = Router();
 
-eventsRouter.post("/", /* isAdmin, */ propsEvents, async (req, res, next) => {
+eventsRouter.post("/", isAdmin, propsEvents, async (req, res, next) => {
   try {
     const data = req.body;
     const response = await events.create(data);

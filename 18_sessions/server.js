@@ -4,6 +4,9 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
+import cookieParser from "cookie-parser";
+import expressSession from "express-session";
+
 import socketUtils from "./src/utils/socket.utils.js";
 
 import router from "./src/routers/index.router.js";
@@ -30,6 +33,15 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 //middlewares
+server.use(cookieParser(process.env.SECRET_KEY));
+server.use(
+  expressSession({
+    secret: process.env.SECRET_KEY,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static("public"));
