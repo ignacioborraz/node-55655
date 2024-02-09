@@ -82,6 +82,15 @@ class MongoManager {
       throw error;
     }
   }
+  async readByEmail(email) {
+    try {
+      const one = await this.model.findOne({ email });
+      notFoundOne(one);
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  }
   async update(id, data) {
     try {
       const opt = { new: true };
