@@ -1,0 +1,28 @@
+<main class="flex-grow-1 d-flex w-100 flex-wrap justify-content-evenly">
+  <section
+    class="w-50 mb-4 d-flex flex-column justify-content-start align-items-center"
+    style="min-width: 380px;"
+  >
+    <h2 class="mt-5 mb-2 text-center">LOG IN!</h2>
+    <form
+      style="max-width: 360px;"
+      class="w-100 d-flex flex-column justify-content-center items-align-center"
+    >
+      <fieldset class="mb-3 text-center">
+        <label for="email" class="form-label mb-0">Email</label>
+        <input type="text" class="form-control" id="email" />
+      </fieldset>
+      <fieldset class="mb-3 text-center">
+        <label for="password" class="form-label mb-0">Password</label>
+        <input type="password" class="form-control" id="password" />
+      </fieldset>
+      <button
+        id="newEvent"
+        type="button"
+        class="w-100 btn btn-danger mt-3"
+      >Log in!</button>
+    </form>
+  </section>
+</main>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/real.js"></script>
