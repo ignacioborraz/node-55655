@@ -1,9 +1,7 @@
 export default (req, res, next) => {
   try {
-    //console.log(req.session);
     const { role } = req.session;
-    //console.log(role);
-    if (role === "admin") {
+    if (role === 1) {
       return next();
     } else {
       const error = new Error("Forbidden");

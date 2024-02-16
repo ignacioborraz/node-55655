@@ -25,14 +25,14 @@ eventsRouter.get("/", async (req, res, next) => {
     const options = {
       limit: req.query.limit || 20,
       page: req.query.page || 1,
-      sort: { name: 1 },
+      sort: { title: 1 },
     };
     const filter = {};
-    if (req.query.name) {
-      filter.name = new RegExp(req.query.name.trim(), "i");
+    if (req.query.title) {
+      filter.title = new RegExp(req.query.title.trim(), "i");
     }
     if (req.query.sort === "desc") {
-      options.sort.name = "desc";
+      options.sort.title = "desc";
     }
     const all = await events.read({ filter, options });
     return res.json({
@@ -60,7 +60,7 @@ eventsRouter.get("/:eid", async (req, res, next) => {
 eventsRouter.put("/:eid", isCapacityOkMid, async (req, res, next) => {
   try {
     const { eid } = req.params;
-    const data = req.body
+    const data = req.body;
     const response = await events.update(eid, data);
     return res.json({
       statusCode: 200,

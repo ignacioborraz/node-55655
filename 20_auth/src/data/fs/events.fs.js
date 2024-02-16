@@ -26,7 +26,7 @@ class EventsManager {
     try {
       const event = {
         id: crypto.randomBytes(12).toString("hex"),
-        name: data.name,
+        title: data.title,
         poster: data.poster || "https://i.postimg.cc/HxdvTwqJ/events.jpg",
         place: data.place,
         price: data.price || 10,
@@ -70,14 +70,14 @@ class EventsManager {
   }
   async soldticket(quantity, eid) {
     try {
-        const one = events.readEventById(eid);
-        one.capacity = one.capacity - quantity;
-        EventsManager.#totalGain =
-          EventsManager.#totalGain +
-          one.price * quantity * EventsManager.#perGain;
-        const jsonData = JSON.stringify(this.events, null, 2);
-        await fs.promises.writeFile(this.path, jsonData);
-        return one.capacity;
+      const one = events.readEventById(eid);
+      one.capacity = one.capacity - quantity;
+      EventsManager.#totalGain =
+        EventsManager.#totalGain +
+        one.price * quantity * EventsManager.#perGain;
+      const jsonData = JSON.stringify(this.events, null, 2);
+      await fs.promises.writeFile(this.path, jsonData);
+      return one.capacity;
     } catch (error) {
       throw error;
     }

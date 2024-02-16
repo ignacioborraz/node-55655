@@ -2,19 +2,19 @@ import { Router } from "express";
 
 const sessionsRouter = Router();
 
-sessionsRouter.get("/register", async(req,res,next)=>{
+sessionsRouter.get("/register", async (req, res, next) => {
   try {
-    return res.render("register")
+    return res.render("register");
   } catch (error) {
-    return next(error)
+    return next(error);
   }
-})
-sessionsRouter.get("/login", async(req,res,next)=>{
+});
+sessionsRouter.get("/login", async (req, res, next) => {
   try {
-    return res.render("login")
+    return res.render("login");
   } catch (error) {
-    return next(error)
+    return next(error);
   }
-})
+});
 
 export default sessionsRouter;

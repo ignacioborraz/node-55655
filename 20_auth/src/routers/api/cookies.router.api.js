@@ -25,12 +25,14 @@ cookiesRouter.get("/get", async (req, res, next) => {
   try {
     const modo = req.cookies.modo;
     const sessionId = req.signedCookies.sessionId;
-    return res
-      //.status(200)    //mientras no declare este método: la API es REST (stateless)
-      .json({
-        statusCode: 200,
-        response: { modo, sessionId }
-      });
+    return (
+      res
+        //.status(200)    //mientras no declare este método: la API es REST (stateless)
+        .json({
+          statusCode: 200,
+          response: { modo, sessionId },
+        })
+    );
   } catch (error) {
     return next(error);
   }

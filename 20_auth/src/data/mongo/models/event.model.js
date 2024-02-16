@@ -4,7 +4,7 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const collection = "events";
 const schema = new Schema(
   {
-    name: { type: String, required: true, index: true },
+    title: { type: String, required: true, index: true },
     poster: {
       type: String,
       default: "https://i.postimg.cc/HxdvTwqJ/events.jpg",

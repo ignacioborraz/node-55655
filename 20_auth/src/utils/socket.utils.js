@@ -7,7 +7,7 @@ export default (socket) => {
   socket.emit("movies", events.readEvents());
   socket.on("newMovie", async (data) => {
     try {
-      propsEventsUtils(data)
+      propsEventsUtils(data);
       await events.createEvent(data);
       socketServer.emit("movies", events.readEvents());
     } catch (error) {

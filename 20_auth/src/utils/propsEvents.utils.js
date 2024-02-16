@@ -1,7 +1,7 @@
 function propsEventsUtils(data) {
-  const { name, place } = data;
-  if (!name || !place) {
-    const error = new Error("name & place are required");
+  const { title, place } = data;
+  if (!title || !place) {
+    const error = new Error("title & place are required");
     error.statusCode = 404;
     throw error;
   }
