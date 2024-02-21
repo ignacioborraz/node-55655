@@ -36,6 +36,58 @@ sessionsRouter.post(
       return res.json({
         statusCode: 200,
         message: "Logged in!",
+        token: req.token,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+//google
+sessionsRouter.post(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+//google-callback
+sessionsRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: "/api/sessions/badauth",
+  }),
+  async (req, res, next) => {
+    try {
+      return res.json({
+        statusCode: 200,
+        message: "Logged in with google!",
+        session: req.session,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+//google
+sessionsRouter.post(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+//github-callback
+sessionsRouter.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    session: false,
+    failureRedirect: "/api/sessions/badauth",
+  }),
+  async (req, res, next) => {
+    try {
+      return res.json({
+        statusCode: 200,
+        message: "Logged in with github!",
         session: req.session,
       });
     } catch (error) {
