@@ -1,8 +1,10 @@
 import { Router } from "express";
 
 import { events } from "../../data/mongo/manager.mongo.js";
+
 import eventsRouter from "./events.view.js";
 import sessionsRouter from "./sessions.view.js";
+import ordersRouter from "./orders.view.js";
 
 const viewsRouter = Router();
 
@@ -12,6 +14,7 @@ viewsRouter.get("/", async (req, res, next) => {
       limit: req.query.limit || 4,
       page: req.query.page || 1,
       sort: { title: 1 },
+      lean: true
     };
     const filter = {};
     if (req.query.title) {
@@ -32,7 +35,11 @@ viewsRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
 viewsRouter.use("/events", eventsRouter);
+
+viewsRouter.use("/orders", ordersRouter);
+
 viewsRouter.use("/sessions", sessionsRouter);
 
 export default viewsRouter;

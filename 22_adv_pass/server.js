@@ -9,13 +9,13 @@ import expressSession from "express-session";
 import sessionFileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 
-import socketUtils from "./src/utils/socket.utils.js";
+import socketUtils from "./src/utils/socket.util.js";
 
 import router from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
 import pathHandler from "./src/middlewares/pathHandler.js";
 import __dirname from "./utils.js";
-import dbConnection from "./src/utils/dbConnection.utils.js";
+import dbConnection from "./src/utils/dbConnection.util.js";
 
 //server
 const server = express();
@@ -60,7 +60,7 @@ server.use(cookieParser(process.env.SECRET_KEY));
   })
 ); */
 //MONGO STORE
-server.use(
+/* server.use(
   expressSession({
     secret: process.env.SECRET_KEY,
     resave: true,
@@ -70,7 +70,7 @@ server.use(
       mongoUrl: process.env.DB_LINK,
     }),
   })
-);
+); */
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static("public"));

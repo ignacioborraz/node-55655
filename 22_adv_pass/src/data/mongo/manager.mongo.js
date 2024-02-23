@@ -1,7 +1,7 @@
 import User from "./models/user.model.js";
 import Event from "./models/event.model.js";
 import Order from "./models/order.model.js";
-import notFoundOne from "../../utils/notFoundOne.utils.js";
+import notFoundOne from "../../utils/notFoundOne.util.js";
 import { Types } from "mongoose";
 
 class MongoManager {
@@ -18,7 +18,6 @@ class MongoManager {
   }
   async read({ filter, options }) {
     try {
-      options = { ...options, lean: true };
       const all = await this.model.paginate(filter, options);
       if (all.totalDocs === 0) {
         const error = new Error("There aren't any document");
@@ -33,9 +32,7 @@ class MongoManager {
   async reportBill(uid) {
     try {
       const report = await this.model.aggregate([
-        //$match productos de un usuario en el carrito (las órdenes de un usuario)
         { $match: { user_id: new Types.ObjectId(uid) } },
-        //$lookup para popular los eventos
         {
           $lookup: {
             from: "events",
@@ -44,7 +41,6 @@ class MongoManager {
             as: "event_id",
           },
         },
-        //$replaceRoot para mergear el objeto con el objeto cero del array populado
         {
           $replaceRoot: {
             newRoot: {
@@ -52,11 +48,8 @@ class MongoManager {
             },
           },
         },
-        //$set para agregar la propiedad subtotal = price*quantity
         { $set: { subtotal: { $multiply: ["$price", "$quantity"] } } },
-        //$group para agrupar por user_id y sumar los subtotales
         { $group: { _id: "$user_id", total: { $sum: "$subtotal" } } },
-        //$project para limpiar el objeto (dejar sólo user_id, total y date)
         {
           $project: {
             _id: false,

@@ -22,7 +22,7 @@ schema.pre("find", function () {
   this.populate("user_id", "-password -createdAt -updatedAt -__v");
 });
 schema.pre("find", function () {
-  this.populate("event_id", "name place price");
+  this.populate("event_id", "title poster place price");
 });
 
 const Order = model(collection, schema);

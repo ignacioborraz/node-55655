@@ -1,6 +1,6 @@
 import { socketServer } from "../../server.js";
 import events from "../data/fs/events.fs.js";
-import propsEventsUtils from "./propsEvents.utils.js";
+import propsEventsUtils from "./propsEvents.util.js";
 
 export default (socket) => {
   console.log("client " + socket.id + " connected");

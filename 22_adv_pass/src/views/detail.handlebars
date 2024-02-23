@@ -22,8 +22,8 @@
         {{event.place}}</h5>
       <h5 class="p-2 text-center card-title">Capacity available:
         {{event.capacity}}</h5>
-        <input class="btn btn-danger fs-5 m-1 me-3" type="button" value="Add to cart!">
+        <input id={{event._id}} class="addToCart btn btn-danger fs-5 m-1 me-3" type="button" value="Add to cart!">
     </article>
-
   </section>
 </main>
+<script src="/scripts/addToCart.js"></script>

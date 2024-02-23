@@ -1,24 +1,25 @@
 import { Router } from "express";
 //import events from "../../data/fs/events.fs.js";
 import { events } from "../../data/mongo/manager.mongo.js";
-import propsEvents from "../../middlewares/propsEvents.mid.js";
 import isAdmin from "../../middlewares/isAdmin.mid.js";
-import isCapacityOkMid from "../../middlewares/isCapacityOk.mid.js";
+import passCallBackMid from "../../middlewares/passCallBack.mid.js";
 
 const eventsRouter = Router();
 
-eventsRouter.post("/", isAdmin, propsEvents, async (req, res, next) => {
-  try {
-    const data = req.body;
-    const response = await events.create(data);
-    return res.json({
-      statusCode: 201,
-      response,
-    });
-  } catch (error) {
-    return next(error);
+eventsRouter.post(
+  "/",
+  passCallBackMid("jwt"),
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const data = req.body;
+      const response = await events.create(data);
+      return res.json({ statusCode: 201, response });
+    } catch (error) {
+      return next(error);
+    }
   }
-});
+);
 
 eventsRouter.get("/", async (req, res, next) => {
   try {
@@ -26,6 +27,7 @@ eventsRouter.get("/", async (req, res, next) => {
       limit: req.query.limit || 20,
       page: req.query.page || 1,
       sort: { title: 1 },
+      lean: true
     };
     const filter = {};
     if (req.query.title) {
@@ -57,7 +59,7 @@ eventsRouter.get("/:eid", async (req, res, next) => {
   }
 });
 
-eventsRouter.put("/:eid", isCapacityOkMid, async (req, res, next) => {
+eventsRouter.put("/:eid", async (req, res, next) => {
   try {
     const { eid } = req.params;
     const data = req.body;
