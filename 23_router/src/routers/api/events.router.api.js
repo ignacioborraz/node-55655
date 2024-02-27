@@ -1,0 +1,89 @@
+import { Router } from "express";
+//import events from "../../data/fs/events.fs.js";
+import { events } from "../../data/mongo/manager.mongo.js";
+import isAdmin from "../../middlewares/isAdmin.mid.js";
+import passCallBackMid from "../../middlewares/passCallBack.mid.js";
+
+const eventsRouter = Router();
+
+eventsRouter.post(
+  "/",
+  passCallBackMid("jwt"),
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const data = req.body;
+      const response = await events.create(data);
+      return res.json({ statusCode: 201, response });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+eventsRouter.get("/", async (req, res, next) => {
+  try {
+    const options = {
+      limit: req.query.limit || 20,
+      page: req.query.page || 1,
+      sort: { title: 1 },
+      lean: true
+    };
+    const filter = {};
+    if (req.query.title) {
+      filter.title = new RegExp(req.query.title.trim(), "i");
+    }
+    if (req.query.sort === "desc") {
+      options.sort.title = "desc";
+    }
+    const all = await events.read({ filter, options });
+    return res.json({
+      statusCode: 200,
+      response: all,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+eventsRouter.get("/:eid", async (req, res, next) => {
+  try {
+    const { eid } = req.params;
+    const one = await events.readOne(eid);
+    return res.json({
+      statusCode: 200,
+      response: one,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+eventsRouter.put("/:eid", async (req, res, next) => {
+  try {
+    const { eid } = req.params;
+    const data = req.body;
+    const response = await events.update(eid, data);
+    return res.json({
+      statusCode: 200,
+      response: response,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+eventsRouter.delete("/:eid", async (req, res, next) => {
+  try {
+    const { eid } = req.params;
+    const response = await events.destroy(eid);
+    return res.json({
+      statusCode: 200,
+      response,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+export default eventsRouter;
