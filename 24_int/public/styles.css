@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box
+}
+body {
+  min-height: 100vh;
+}
+
+#background {
+  background-image: url("/image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 80%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  font-size: 50px;
+}
+
+.SUBtitle {
+  font-size: 50px;
+}
+
+#arrow {
+  width: 200px;
+  margin-bottom: 150px;
+}
+
+.anchor {
+  text-decoration: none;
+}
+
+.anchor:hover {
+  background-color: rgb(230, 230, 230);
+}
