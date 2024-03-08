@@ -1,6 +1,7 @@
 import User from "./models/user.model.js";
 import Event from "./models/event.model.js";
 import Order from "./models/order.model.js";
+import Comment from "./models/comment.model.js";
 import notFoundOne from "../../utils/notFoundOne.util.js";
 import { Types } from "mongoose";
 
@@ -120,6 +121,7 @@ class MongoManager {
 const users = new MongoManager(User);
 const events = new MongoManager(Event);
 const orders = new MongoManager(Order);
+const comments = new MongoManager(Comment);
 
-export { users, events, orders };
+export { users, events, orders, comments };
 export default MongoManager;
