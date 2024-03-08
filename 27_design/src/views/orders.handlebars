@@ -1,0 +1,71 @@
+<main class="flex-grow-1 w-100 d-flex flex-column">
+  <h2 class="subtitle mt-4 mb-2 text-center">MY CART</h2>
+  {{#if message}}
+    message
+  {{else}}
+    <section
+      id="movies"
+      class="d-flex flex-column justify-content-center align-items-center m-auto mt-2 mb-4 bg-light"
+      style="width: 360px;"
+    >
+      <article class="w-100 d-flex border border-danger">
+        <p style="width: 100px;" class="m-0 p-2 fw-bold"></p>
+        <p
+          style="width: 100px;"
+          class="d-flex justify-content-start align-items-center m-0 p-2 fw-bold"
+        >Title</p>
+        <p
+          style="width: 100px;"
+          class="d-flex justify-content-end align-items-center m-0 p-2 fw-bold"
+        >Price</p>
+        <p style="width: 60px;" class="m-0 p-2 fw-bold"></p>
+      </article>
+      {{#each orders}}
+        <article class="w-100 d-flex border border-danger">
+          <img
+            src={{this.event_id.poster}}
+            style="width: 100px; heigth: 100px"
+            style="height: 100px; width: 100px"
+            class="object-fit-cover m-0"
+            alt="{{this.event_id.title}}"
+          />
+          <p
+            class="d-flex justify-content-start align-items-center m-0 p-2"
+            style="width: 100px;"
+          >{{this.event_id.title}}
+            <br />
+            {{this.event_id.place}}</p>
+          <p
+            class="d-flex justify-content-end align-items-center m-0 p-2"
+            style="width: 100px;"
+          >USD {{this.event_id.price}}</p>
+          <span
+            class="d-flex justify-content-center align-items-center m-0 p-2"
+            style="width: 60px;"
+          >
+            <img
+              class="deleteButton"
+              id={{this._id}}
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAZlJREFUaEPtWTFOw0AQnO0RSPCEmIoWp4CUmAKQ+A0FD8iHECDFlCQFTgtNwhMAIR6wCKEgy4q1d3t3sSzW7e7s7szcybKX0POHej4/jEDXDgY5sDg8uSSiKwAHAHY8yXwCeCbi8eDp4dYT+5euJvA6PL1g5htt4zqOGOeDeXmnqaUmsMyLKYAjTdM1mFlWlceaWnoCw+ILjC1N0yaGgff9qtzT1NITyAuuN8yq0qvWMhC/6u3VtD5w6ACheCMQqmAoXnSg2UBzwWJi2u5Y6x0wAjHlB/D/HGgKGOvStRmjre/8HtA2cD1J2vpGwFVhKa9zB6QBQuNtAkQ7QqEDSngjICmUOm4OpFZYqm8OSAqljpsDqRWW6psDkkKp4+ZAaoWl+uaApFDqeHIHpA8WKS4JYAS0CknKr+La+tG+yFwH7ey3yiIv3gjYDR3UBe+z8PBx4BGAag3kMnQjZ5pV5cgF50wg5lJPHIzpLJtP7sU8wG/R/UsC1wD/rFW3XRp45HwAeCHG2Gdj6eyAxyAbTTUCG5V7TbPeO/AN+v+sQEsryjsAAAAASUVORK5CYII="
+            />
+          </span>
+        </article>
+      {{/each}}
+    </section>
+    <span class="w-100 d-flex justify-content-center">
+      {{#if prev}}
+        <a
+          class="btn btn-danger fs-5 m-4 mt-0"
+          href="/?title={{filter}}&page={{prev}}"
+        >PREV</a>
+      {{/if}}
+      {{#if next}}
+        <a
+          class="btn btn-danger fs-5 m-4 mt-0"
+          href="/?title={{filter}}&page={{next}}"
+        >NEXT</a>
+      {{/if}}
+    </span>
+  {{/if}}
+</main>
+<script src="/scripts/orders.js"></script>
