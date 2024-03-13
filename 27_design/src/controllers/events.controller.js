@@ -16,7 +16,7 @@ class EventsController {
   read = async (req, res, next) => {
     try {
       const options = {
-        limit: req.query.limit || 20,
+        limit: req.query.limit || 8,
         page: req.query.page || 1,
         sort: { title: 1 },
         lean: true,
