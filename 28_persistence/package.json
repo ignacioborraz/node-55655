@@ -1,0 +1,41 @@
+{
+  "name": "07_adv_exp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js --env dev",
+    "test": "nodemon ./server.js --env test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "commander": "^12.0.0",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.1",
+    "mongoose-paginate-v2": "^1.8.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
