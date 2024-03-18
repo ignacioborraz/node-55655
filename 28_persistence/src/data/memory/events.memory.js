@@ -1,10 +1,11 @@
 import crypto from "crypto";
+import notFoundOne from "../../utils/notFoundOne.util.js";
 
 class EventsManager {
   static #users = [];
 
   constructor() {}
-  async createEvent(data) {
+  async create(data) {
     try {
       const event = {
         id: crypto.randomBytes(12).toString("hex"),
@@ -16,12 +17,15 @@ class EventsManager {
         date: data.date || new Date(),
       };
       EventsManager.#users.push(event);
-      return event.id;
+      return event;
     } catch (error) {
       throw error;
     }
   }
-  readEvents() {
+  read({ filter, options }) {
+    //este metodo para ser compatible con las otras persistencias
+    //necesita agregar los filtros
+    //y la paginacion/orden
     try {
       if (EventsManager.#users.length === 0) {
         const error = new Error("NOT FOUND!");
@@ -34,7 +38,7 @@ class EventsManager {
       throw error;
     }
   }
-  readEventById(id) {
+  readOne(id) {
     try {
       const one = EventsManager.#users.find((each) => each.id === id);
       if (!one) {
@@ -48,9 +52,10 @@ class EventsManager {
       throw error;
     }
   }
-  async updateEvent(eid, data) {
+  async update(eid, data) {
     try {
-      const one = EventsManager.#users.readEventById(eid);
+      const one = this.readOne(eid);
+      notFoundOne(one)
       for (let each in data) {
         one[each] = data[each];
       }
@@ -59,13 +64,14 @@ class EventsManager {
       throw error;
     }
   }
-  async removeEventById(id) {
+  async destroy(id) {
     try {
-      this.readEventById(id);
+      const one = this.readOne(id);
+      notFoundOne(one)
       EventsManager.#users = EventsManager.#users.filter(
         (each) => each.id !== id
       );
-      return id;
+      return one;
     } catch (error) {
       throw error;
     }
@@ -73,4 +79,4 @@ class EventsManager {
 }
 
 const events = new EventsManager();
-export default { events };
+export default events;

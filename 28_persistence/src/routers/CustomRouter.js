@@ -1,6 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { users } from "../data/mongo/manager.mongo.js";
+import dao from "../data/index.factory.js";
+const { users } = dao
 
 export default class CustomRouter {
   constructor() {
@@ -10,7 +11,7 @@ export default class CustomRouter {
   getRouter() {
     return this.router;
   }
-  init() {}
+  init() { }
   applyCbs(cbs) {
     //cbs es un array de callbacks (por ejemplo todos los middlewares que necesita el endpoint /api/sessions/signout)
     return cbs.map((each) => async (...params) => {
@@ -18,9 +19,9 @@ export default class CustomRouter {
         await each.apply(this, params);
       } catch (error) {
         /* return */ params[1].json({
-          statusCode: 500,
-          message: error.message,
-        });
+        statusCode: 500,
+        message: error.message,
+      });
       }
     });
   }

@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "e11fa5b237baa4e327e604dd",
+    "user_id": "c330df10596050dbfbfc8351",
+    "event_id": "fbca838fdf2ac83f4b20c8d5",
+    "quantity": 2,
+    "state": "reserved",
+    "updatedAt": "2024-03-18T01:24:04.436Z",
+    "createdAt": "2024-03-18T01:24:04.436Z"
+  }
+]

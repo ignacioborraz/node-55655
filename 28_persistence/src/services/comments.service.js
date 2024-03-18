@@ -1,49 +1,20 @@
-import { comments } from "../data/mongo/manager.mongo.js";
+import repository from "../repositories/comments.rep.js";
+import CommentDTO from "../dto/comment.dto.js";
 
 class CommentsService {
   constructor() {
-    this.model = comments;
+    this.repository = repository;
   }
   create = async (data) => {
-    try {
-      const response = await this.model.create(data);
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    data = new CommentDTO(data);
+    const response = await this.repository.create(data);
+    return response;
   };
-  read = async ({ filter, options }) => {
-    try {
-      const response = await this.model.read({ filter, options });
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-  readOne = async (id) => {
-    try {
-      const response = await this.model.readOne(id);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-  update = async (id, data) => {
-    try {
-      const response = await this.model.update(id, data);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-  destroy = async (id) => {
-    try {
-      const response = await this.model.destroy(id);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
+  read = async ({ filter, options }) =>
+    await this.repository.read({ filter, options });
+  readOne = async (id) => await this.repository.readOne(id);
+  update = async (id, data) => await this.repository.update(id, data);
+  destroy = async (id) => await this.repository.destroy(id);
 }
 
 const service = new CommentsService();

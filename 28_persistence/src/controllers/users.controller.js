@@ -34,15 +34,6 @@ class UsersController {
       return next(error);
     }
   };
-  stats = async (req, res, next) => {
-    try {
-      const id = req.user._id;
-      const all = await this.service.stats(id);
-      return res.success200(all);
-    } catch (error) {
-      return next(error);
-    }
-  };
   readOne = async (req, res, next) => {
     try {
       const { eid } = req.params;
@@ -75,5 +66,5 @@ class UsersController {
 
 export default UsersController;
 const controller = new UsersController();
-const { create, read, stats, readOne, update, destroy } = controller;
-export { create, read, stats, readOne, update, destroy };
+const { create, read, readOne, update, destroy } = controller;
+export { create, read, readOne, update, destroy };

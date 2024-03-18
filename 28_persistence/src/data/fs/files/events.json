@@ -52,5 +52,34 @@
     "price": "2",
     "capacity": "1000",
     "date": "2024-01-05T22:17:52.959Z"
+  },
+  {
+    "id": "31c18ed518ba371b9d48779a",
+    "title": "Peli",
+    "poster": "https://i.postimg.cc/HxdvTwqJ/events.jpg",
+    "place": "Stadium",
+    "price": 10,
+    "capacity": 50,
+    "date": "2024-03-15T00:22:43.524Z"
+  },
+  {
+    "id": "51170d4438e77b7d8b5f7bf8",
+    "title": "PELI NUEVA",
+    "poster": "https://i.postimg.cc/HxdvTwqJ/events.jpg",
+    "place": "Stadium",
+    "price": 10,
+    "capacity": 50,
+    "date": "2024-03-15T00:23:21.160Z"
+  },
+  {
+    "_id": "fbca838fdf2ac83f4b20c8d5",
+    "title": "PELI NUEVA EN FS",
+    "poster": "https://i.postimg.cc/HxdvTwqJ/events.jpg",
+    "place": "Stadium",
+    "price": 10,
+    "capacity": 50,
+    "date": "2024-03-15T01:03:30.896Z",
+    "updatedAt": "2024-03-15T01:03:30.896Z",
+    "createdAt": "2024-03-15T01:03:30.896Z"
   }
 ]

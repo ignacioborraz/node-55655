@@ -1,5 +1,5 @@
 import fs from "fs";
-import crypto from "crypto";
+import notFoundOne from "../../utils/notFoundOne.util.js";
 
 class UsersManager {
   init() {
@@ -22,26 +22,18 @@ class UsersManager {
   }
   async create(data) {
     try {
-      if (!data.name || !data.email) {
-        const error = new Error("name & email are required");
-        error.statusCode = 400;
-        throw error;
-      }
-      const user = {
-        id: crypto.randomBytes(12).toString("hex"),
-        name: data.name,
-        email: data.email,
-        photo: data.photo || "https://i.postimg.cc/wTgNFWhR/profile.png",
-      };
-      this.users.push(user);
+      this.users.push(data);
       const jsonData = JSON.stringify(this.users, null, 2);
       await fs.promises.writeFile(this.path, jsonData);
-      return user.id;
+      return data;
     } catch (error) {
       throw error;
     }
   }
-  read() {
+  read({ filter, options }) {
+    //este metodo para ser compatible con las otras persistencias
+    //necesita agregar los filtros
+    //y la paginacion/orden
     try {
       if (this.users.length === 0) {
         const error = new Error("NOT FOUND!");
@@ -56,7 +48,7 @@ class UsersManager {
   }
   readOne(id) {
     try {
-      const one = this.users.find((each) => each.id === id);
+      const one = this.users.find((each) => each._id === id);
       if (!one) {
         const error = new Error("NOT FOUND!");
         error.statusCode = 404;
@@ -68,16 +60,27 @@ class UsersManager {
       throw error;
     }
   }
-  async update(uid, data) {
+  readByEmail(email) {
     try {
-      const one = this.users.readOne(uid);
-      if (one) {
-        for (let each in data) {
-          one[each] = data[each];
-        }
-        const jsonData = JSON.stringify(this.events, null, 2);
-        await fs.promises.writeFile(this.path, jsonData);
+      const one = this.users.find((each) => each.email === email);
+      if (!one) {
+        return null;
+      } else {
+        return one;
       }
+    } catch (error) {
+      throw error;
+    }
+  }
+  async update(eid, data) {
+    try {
+      const one = this.readOne(eid);
+      notFoundOne(one)
+      for (let each in data) {
+        one[each] = data[each]
+      }
+      const jsonData = JSON.stringify(this.users, null, 2);
+      await fs.promises.writeFile(this.path, jsonData);
       return one;
     } catch (error) {
       throw error;
@@ -86,11 +89,10 @@ class UsersManager {
   async destroy(id) {
     try {
       const one = this.readOne(id);
-      if (one) {
-        this.users = this.users.filter((each) => each.id !== id);
-        const jsonData = JSON.stringify(this.users, null, 2);
-        await fs.promises.writeFile(this.path, jsonData);
-      }
+      notFoundOne(one)
+      this.users = this.users.filter((each) => each._id !== id);
+      const jsonData = JSON.stringify(this.users, null, 2);
+      await fs.promises.writeFile(this.path, jsonData);
       return one;
     } catch (error) {
       throw error;
@@ -99,4 +101,4 @@ class UsersManager {
 }
 
 const users = new UsersManager("./src/data/fs/files/users.json");
-export default { users };
+export default users;
