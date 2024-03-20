@@ -10,7 +10,7 @@ import pathHandler from "./src/middlewares/pathHandler.js";
 
 //server
 const server = express();
-const PORT = process.env.PORT || args.p;
+const PORT = process.env.PORT || 8080;
 const ready = () => console.log("server ready on port " + PORT);
 server.listen(PORT, ready);
 
@@ -24,7 +24,6 @@ server.use(
 server.use(cookieParser(process.env.SECRET));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(express.static("public"));
 server.use(morgan("dev"));
 
 //endpoints

@@ -7,11 +7,11 @@ class NotesRep {
   constructor() {
     this.model = notes;
   }
-  create;
-  read;
-  readOne;
-  update;
-  destroy;
+  create = async (data) => await this.model.create(new NoteDTO(data));
+  read = async ({ filter, options }) => await this.model.read({ filter, options });
+  readOne = async (id) => await this.model.readOne(id);
+  update = async (id, data) => await this.model.update(id, data);
+  destroy = async (id) => await this.model.destroy(id);
 }
 
 const repository = new NotesRep();

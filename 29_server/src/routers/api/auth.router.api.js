@@ -2,11 +2,10 @@ import { Router } from "express";
 import { register, login, signout } from "../../controllers/auth.controller.js";
 import passCallback from "../../middlewares/passCallback.js";
 
-const sessionsRouter = Router();
+const authrouter = Router();
 
-//register
-sessionsRouter.post("/register", passCallback("register"), register);
-sessionsRouter.post("/login", passCallback("login"), login);
-sessionsRouter.post("/signout", passCallback("jwt"), signout);
+authrouter.post("/register", passCallback("register"), register);
+authrouter.post("/login", passCallback("login"), login);
+authrouter.post("/signout", passCallback("jwt"), signout);
 
-export default sessionsRouter;
+export default authrouter;

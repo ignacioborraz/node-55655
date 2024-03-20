@@ -1,5 +1,4 @@
 import dbConnection from "../utils/db.utils.js";
-
 const persistence = process.env.PERSISTENCE || "MONGO";
 
 let dao = {};
