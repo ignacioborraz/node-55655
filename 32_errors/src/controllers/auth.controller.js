@@ -1,4 +1,6 @@
 import service from "../services/users.service.js";
+import CustomError from "../utils/errors/CustomError.js";
+import errors from "../utils/errors/errors.js";
 
 class AuthController {
   constructor() {
@@ -52,10 +54,11 @@ class AuthController {
           message: "Verified user!",
         });
       } else {
-        return res.json({
+        /*         return res.json({
           statusCode: 400,
           message: "Invalid verified token!",
-        });
+        }); */
+        CustomError.new(errors.token);
       }
     } catch (error) {
       return next(error);

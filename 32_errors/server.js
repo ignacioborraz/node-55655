@@ -3,6 +3,7 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import compression from "express-compression";
 
 import router from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
@@ -26,6 +27,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(morgan("dev"));
 server.use(express.static("public"));
+server.use(compression());
 
 //endpoints
 server.use("/", router);

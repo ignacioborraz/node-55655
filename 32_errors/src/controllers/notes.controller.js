@@ -1,4 +1,6 @@
 import service from "../services/notes.service.js";
+import CustomError from "../utils/errors/CustomError.js";
+import errors from "../utils/errors/errors.js";
 
 class NotesController {
   constructor() {
@@ -33,9 +35,10 @@ class NotesController {
           response: all,
         });
       } else {
-        const error = new Error("Not found!");
+        /*         const error = new Error("Not found!");
         error.statusCode = 404;
-        throw error;
+        throw error; */
+        CustomError.new(errors.notFound);
       }
     } catch (error) {
       return next(error);

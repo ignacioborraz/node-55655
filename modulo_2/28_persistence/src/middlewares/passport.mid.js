@@ -5,9 +5,10 @@ import { Strategy as GithubStrategy } from "passport-github2";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
-import UserDTO from '../dto/user.dto.js';
+import UserDTO from "../dto/user.dto.js";
 import dao from "../data/index.factory.js";
-const { users } = dao
+import errors from "../utils/errors/errors.js";
+const { users } = dao;
 const { GOOGLE_ID, GOOGLE_CLIENT, GITHUB_ID, GITHUB_CLIENT, SECRET } =
   process.env;
 
@@ -21,14 +22,11 @@ passport.use(
         if (!one) {
           let data = req.body;
           data.password = createHash(password);
-          data = new UserDTO(data)
+          data = new UserDTO(data);
           let user = await users.create(data);
           return done(null, user);
         } else {
-          return done(null, false, {
-            message: "User already exists",
-            statusCode: 400,
-          });
+          return done(null, false, errors.register);
         }
       } catch (error) {
         return done(error);
@@ -48,7 +46,7 @@ passport.use(
           req.token = token;
           return done(null, user);
         } else {
-          return done(null, false, { message: "Bad auth!!!" });
+          return done(null, false, errors.auth);
         }
       } catch (error) {
         return done(error);
@@ -133,7 +131,7 @@ passport.use(
           user.password = null;
           return done(null, user);
         } else {
-          return done(null, false);
+          return done(null, false, errors.forbidden);
         }
       } catch (error) {
         return done(error);

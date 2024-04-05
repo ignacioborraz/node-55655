@@ -6,7 +6,7 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import compression from "express-compression"
 import socketUtils from "./src/utils/socket.util.js";
 
 import router from "./src/routers/index.router.js";
@@ -44,6 +44,11 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static("public"));
 server.use(morgan("dev"));
+server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
+  })
+);
 
 //endpoints
 server.use("/", router);
