@@ -1,9 +1,6 @@
-import User from "./models/user.model.js";
-import Event from "./models/event.model.js";
-import Order from "./models/order.model.js";
-import Comment from "./models/comment.model.js";
-import notFoundOne from "../../utils/notFoundOne.util.js";
 import { Types } from "mongoose";
+import CustomError from "../../utils/errors/CustomError.js";
+import errors from "../../utils/errors/errors.js";
 
 class MongoManager {
   constructor(model) {
@@ -21,9 +18,7 @@ class MongoManager {
     try {
       const all = await this.model.paginate(filter, options);
       if (all.totalDocs === 0) {
-        const error = new Error("NOT FOUND!");
-        error.statusCode = 404;
-        throw error;
+        CustomError.new(errors.notFound);
       }
       return all;
     } catch (error) {
@@ -70,7 +65,7 @@ class MongoManager {
   async readOne(id) {
     try {
       const one = await this.model.findById(id).lean();
-      notFoundOne(one);
+      CustomError.new(errors.notFound);
       return one;
     } catch (error) {
       throw error;
@@ -88,7 +83,7 @@ class MongoManager {
     try {
       const opt = { new: true };
       const one = await this.model.findByIdAndUpdate(id, data, opt);
-      notFoundOne(one);
+      CustomError.new(errors.notFound);
       return one;
     } catch (error) {
       throw error;
@@ -97,7 +92,7 @@ class MongoManager {
   async destroy(id) {
     try {
       const one = await this.model.findByIdAndDelete(id);
-      notFoundOne(one);
+      CustomError.new(errors.notFound);
       return one;
     } catch (error) {
       throw error;
