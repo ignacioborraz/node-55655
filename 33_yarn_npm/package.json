@@ -1,0 +1,17 @@
+{
+  "name": "33_yarn_npm",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "calculator-55655": "^2.0.0",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1",
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js"
+  }
+}
