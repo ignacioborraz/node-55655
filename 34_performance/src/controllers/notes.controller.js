@@ -44,8 +44,40 @@ class NotesController {
       return next(error);
     }
   };
+  readOne = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const one = await this.service.readOne(id);
+      if (one) {
+        return res.json({
+          status: 200,
+          response: one,
+        });
+      } else {
+        CustomError.new(errors.notFound);
+      }
+    } catch (error) {
+      return next(error);
+    }
+  };
+  destroy = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const one = await this.service.destroy(id);
+      if (one) {
+        return res.json({
+          status: 200,
+          response: one,
+        });
+      } else {
+        CustomError.new(errors.notFound);
+      }
+    } catch (error) {
+      return next(error);
+    }
+  };
 }
 
 const controller = new NotesController();
-const { create, readByUser } = controller;
-export { create, readByUser };
+const { create, readByUser, readOne, destroy } = controller;
+export { create, readByUser, readOne, destroy };
