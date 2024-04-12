@@ -1,5 +1,7 @@
+import winstonLog from "../utils/logger/index.js";
+
 export default (req, res, next) => {
-  console.error(`${req.method} ${req.url} not found path`);
+  winstonLog.WARN(`${req.method} ${req.url} not found path`);
   return res.json({
     statusCode: 404,
     url: `${req.method} ${req.url}`,

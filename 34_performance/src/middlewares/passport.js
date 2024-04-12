@@ -16,7 +16,7 @@ passport.use(
           return done(null, false, { statusCode: 401 });
         } else {
           const user = await repository.create(req.body);
-          console.log(user);
+          //console.log(user);
           return done(null, user);
         }
       } catch (error) {

@@ -1,6 +1,7 @@
 import service from "../services/notes.service.js";
 import CustomError from "../utils/errors/CustomError.js";
 import errors from "../utils/errors/errors.js";
+import winston from "../utils/logger/winston.utils.js";
 
 class NotesController {
   constructor() {
@@ -10,6 +11,7 @@ class NotesController {
     try {
       const data = req.body;
       data.user_id = req.user._id;
+      //winston.INFO(JSON.stringify(data));
       await this.service.create(data);
       return res.json({
         statusCode: 201,
@@ -47,6 +49,7 @@ class NotesController {
   readOne = async (req, res, next) => {
     try {
       const { id } = req.params;
+      winston.INFO(req.params)
       const one = await this.service.readOne(id);
       if (one) {
         return res.json({

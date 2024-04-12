@@ -1,10 +1,11 @@
 import { connect } from "mongoose";
+import wintsonLog from "./logger/winston.utils.js";
 
 export default async () => {
   try {
-    await connect(process.env.DB_LINK)
-    console.log("mongo database connected");
+    await connect(process.env.DB_LINK);
+    wintsonLog.INFO("mongo database connected");
   } catch (error) {
-    console.log(error);
+    wintsonLog.WARN(error.message);
   }
 };

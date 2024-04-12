@@ -2,7 +2,7 @@ import { createTransport } from "nodemailer";
 
 async function sendEmail(data) {
   try {
-    console.log(data);
+    //console.log(data);
     const transport = createTransport({
       service: "gmail",
       port: process.env.PORT,
