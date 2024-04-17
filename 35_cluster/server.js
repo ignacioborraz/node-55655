@@ -4,6 +4,8 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import compression from "express-compression";
+import cluster from "cluster";
+import { cpus } from "os";
 
 import router from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
@@ -15,7 +17,6 @@ import winston from "./src/middlewares/winston.js";
 const server = express();
 const PORT = process.env.PORT || 8080;
 const ready = () => wintsonLog.INFO("server ready on port " + PORT);
-server.listen(PORT, ready);
 
 //middlewares
 server.use(
@@ -36,3 +37,17 @@ server.use(compression());
 server.use("/", router);
 server.use(errorHandler);
 server.use(pathHandler);
+
+//clusters
+console.log(cluster.isPrimary);
+if (cluster.isPrimary) {
+  console.log("PRIMARY ID: " + process.pid);
+  const numberOfProcess = cpus().length;
+  console.log("NUMBER OF PROCESS OF MY COMPUTER: " + numberOfProcess);
+  for (let i = 1; i <= numberOfProcess; i++) {
+    cluster.fork();
+  }
+} else {
+  console.log("WORKER ID: " + process.pid);
+  server.listen(PORT, ready);
+}
