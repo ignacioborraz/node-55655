@@ -12,7 +12,9 @@
     "performance": "artillery run ./test/flow/flow.yaml --output ./test/flow/flow.json",
     "report": "artillery report ./test/flow/flow.html",
     "image": "docker build -t simplexcomplex .",
-    "container": "docker run -p 8080:8080 simplexcomplex"
+    "container": "docker run -p 8080:8080 simplexcomplex",
+    "orquestra": "kubectl apply -f ./orquestra.yaml",
+    "mini": "minikube service simplexcomplex"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simplexcomplex
+spec:
+  selector:
+    app: simplexcomplex
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplexcomplex
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simplexcomplex
+  template:
+    metadata:
+      labels:
+        app: simplexcomplex
+    spec:
+      containers:
+      - name: simplexcomplex
+        image: ignacioborraz/simplexcomplex:1.0.0
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Always
