@@ -1,0 +1,80 @@
+components:
+  schemas:
+    Register:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Name of the user
+        last_name:
+          type: string
+          description: Last name of the user
+        email:
+          type: string
+          description: Email of the user
+        password:
+          type: string
+          description: Password to log the user
+      example:
+        first_name: gabriela
+        last_name: coder
+        email: gabriela@coder.com
+        password: hola1234
+  responses:
+    res201:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Successfull Code
+        payload:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: detail of the property
+            first_name:
+              type: string
+              description: detail of the property
+            last_name:
+              type: string
+              description: detail of the property
+            email:
+              type: string
+              description: detail of the property
+            avatar:
+              type: string
+              description: detail of the property
+            role:
+              type: string
+              description: detail of the property
+          description: Data of the registered user
+      example:
+        status: success
+        payload:
+          _id: 6634319c465242cd36b3a8b1,
+          first_name: gabriela,
+          last_name: coder,
+          avatar: https://cdn-icons-png.flaticon.com/512/6596/6596121.png,
+          email: gabriela@coder.com,
+          role: user
+paths:
+  /api/sessions/register:
+    post:
+      summary: To register a user
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        description: data of the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#components/responses/res201'
