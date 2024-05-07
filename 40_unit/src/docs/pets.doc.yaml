@@ -1,0 +1,96 @@
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the pet
+        specie:
+          type: string
+          description: Specie of the pet
+        birthDate:
+          type: date
+          description: Birth date of the pet
+        adopted:
+          type: boolean
+          description: Is adopted?
+        owner:
+          type: string
+          description: Who adopted?
+        image:
+          type: string
+          description: Photo of the pet
+      example:
+        name: Lolo
+        specie: fish
+        birthDate: 09-07-2020
+        adopted: false
+        image: https://pecesdeacuario10.com/wp-content/uploads/pez-angel-2.jpg
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+  responses:
+    res201:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Successfull Code
+        payload:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: detail of the property
+            name:
+              type: string
+              description: Name of the pet
+            specie:
+              type: string
+              description: Specie of the pet
+            birthDate:
+              type: date
+              description: Birth date of the pet
+            adopted:
+              type: boolean
+              description: Is adopted?
+            owner:
+              type: string
+              description: Who adopted?
+            image:
+              type: string
+              description: Photo of the pet
+          description: Data of the registered pet
+      example:
+        status: success
+        payload:
+          _id: 6634319c465242cd36b3a8b1,
+          name: Lolo
+          specie: fish
+          birthDate: 09-07-2020
+          adopted: false
+          image: https://pecesdeacuario10.com/wp-content/uploads/pez-angel-2.jpg
+paths:
+  /api/pets:
+    post:
+      summary: To create a pet
+      tags:
+        - Pet
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/Pet'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#components/responses/res201'
