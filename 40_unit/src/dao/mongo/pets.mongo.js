@@ -35,7 +35,7 @@ export default class PetsMongo {
   };
   update = async (id, data) => {
     try {
-      return await Pet.findByIdAndUpdate(id, data);
+      return await Pet.findByIdAndUpdate(id, data, { new: true });
     } catch (error) {
       error.where = "mongo";
       throw error;
