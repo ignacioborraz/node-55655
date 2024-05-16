@@ -24,7 +24,7 @@ async function create(req, res, next) {
 
 async function read(req, res, next) {
   try {
-    const { user_id } = req.query;
+    const { user_id } = req.session;
     const all = await cartsManager.read({ user_id });
     if (all.length > 0) {
       return res.json({
