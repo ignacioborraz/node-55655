@@ -18,6 +18,7 @@ export default async function printCartCards(id) {
           cartTemplates +
           createCartCard(element._id, element.product_id, element.quantity);
       }
+      cartTemplates += "<button id='pagar'>PAGAR</button>";
       selector.innerHTML = cartTemplates;
       document.querySelectorAll(".product-input").forEach((each) => {
         each.onchange = (event) => changeQuantityCart(event, products);
@@ -25,6 +26,19 @@ export default async function printCartCards(id) {
       document
         .querySelectorAll(".remove-btn")
         .forEach((each) => (each.onclick = removeProduct));
+      const opts = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      document.querySelector("#pagar").onclick = () =>
+        fetch("/api/payments/checkout", opts)
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res.url);
+            location.replace(res.url);
+          });
     } else {
       selector.innerHTML = `
       <article class="product-cart">
