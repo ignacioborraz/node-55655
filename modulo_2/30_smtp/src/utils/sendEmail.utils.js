@@ -4,13 +4,15 @@ async function sendEmail(data) {
   try {
     console.log(data);
     const transport = createTransport({
-      service: "gmail",
-      port: process.env.PORT,
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.GOOGLE_EMAIL,
         pass: process.env.GOOGLE_PASSWORD,
       },
     });
+    await transport.verify()
     await transport.sendMail({
       from: `CODER <${process.env.GOOGLE_EMAIL}>`,
       to: data.email,
